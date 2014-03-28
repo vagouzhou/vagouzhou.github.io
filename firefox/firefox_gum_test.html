@@ -95,6 +95,15 @@ Note: Audio will feedback unless you use a headset!<br><br>
   var saved_stream = null;
   var capturing = false;
 
+// browser detection
+  	// browser detection
+	var userAgent = navigator.userAgent.toLowerCase();
+	var browserM = userAgent.match(/(opera|chrome|safari|firefox|msie)[\/\s]*([\d\.]+)/);
+	var browser = navigator.appName.toLowerCase();
+	if(browserM)
+		browser = browserM[1];
+  	var isChrome = (browser === "chrome");
+  	var isFirefox = (browser === "firefox");
   
   function startVideo() {
     video_status = true;
@@ -103,18 +112,50 @@ Note: Audio will feedback unless you use a headset!<br><br>
 
   function startScreen() {
     video_status = true;
-    startMedia({
-				Video:{
-					mandatory:{mozMediaSource: 'screen'}
-					}});
+	mediaConstraints = {
+		video: {
+			mandatory:{mozMediaSource:'screen',
+				maxWidth:screen.availWidth,
+				maxHeight:screen.availHeight},
+			optional:[]
+			}
+	};
+	if(isChrome){
+		mediaConstraints = {
+		video: {
+			mandatory:{chromeMediaSource:'screen',
+				maxWidth:screen.availWidth,
+				maxHeight:screen.availHeight},
+			optional:[]
+			}
+	};
+
+	}
+    startMedia(mediaConstraints);
   }
   
   function startApplication() {
     video_status = true;
-    startMedia({
-				Video:{
-					mandatory:{mozMediaSource: 'application'}
-					}});
+		mediaConstraints = {
+		video: {
+			mandatory:{mozMediaSource:'application',
+				maxWidth:screen.availWidth,
+				maxHeight:screen.availHeight},
+			optional:[]
+			}
+	};
+	if(isChrome){
+		mediaConstraints = {
+		video: {
+			mandatory:{chromeMediaSource:'application',
+				maxWidth:screen.availWidth,
+				maxHeight:screen.availHeight},
+			optional:[]
+			}
+	};
+
+	}
+    startMedia(mediaConstraints);
   }
   
   function startAudioVideo() {
@@ -182,10 +223,16 @@ Note: Audio will feedback unless you use a headset!<br><br>
   }
 
   function startMedia(param) {
+
+	window.navigator.getMedia = ( navigator.getUserMedia ||
+                       navigator.webkitGetUserMedia ||
+                       navigator.mozGetUserMedia ||
+                       navigator.msGetUserMedia);
+
     stop.style.display = "block";
     start.style.display = "none";
     try {
-      window.navigator.mozGetUserMedia(param, function(stream) {
+      window.navigator.getMedia(param, function(stream) {
         message.innerHTML = "<p>Success!</p>";
         if (video_status) {
           content.appendChild(video);
