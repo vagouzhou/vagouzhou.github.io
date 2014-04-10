@@ -13,9 +13,11 @@ Test screen sharing through peer connection.
 ==============================================
 we can directly use https://apprtc.appspot.com
   # In screen sending end.
-    copy this link in firefox "https://apprtc.appspot.com/?video=mozMediaSource=screen&audio=false"
-      It will share screen. and generate one room number . e.g.    
-        "https://apprtc.appspot.com/?r=01393400&audio=false&video=mozMediaSource=screen"
+        copy this link in firefox "https://apprtc.appspot.com/?video=mozMediaSource=screen&audio=false"<br>
+        It will share screen. and generate one room number . <br>
+        e.g.    
+        "https://apprtc.appspot.com/?r=01393400&audio=false&video=mozMediaSource=screen"<br>
           room number is "01393400"
-  # In receiving end.
-    input link with room number "https://apprtc.appspot.com/?r=01393400"
+  
+  # In receiving end.<br>
+    input link with room number "https://apprtc.appspot.com/?r=01393400"<br>
