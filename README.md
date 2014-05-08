@@ -1,7 +1,11 @@
 <pre>
 vagouzhou.github.io: web app demo testing.
 
-Test GetUserMedia in Local video
+##Test GetUserMedia by github site.
+====================================================
+vagouzhou.github.io/firefox/firefox_gum_test.html
+
+##Test GetUserMedia in Local video
 ==============================================
 we also can run sever in local by python (need python 2.7),input command as below in terminal console
 <b>python pythonssl.py</b>
@@ -10,7 +14,7 @@ then access it in browser for testing.<br>
 e.g. https://localhost:4443/firefox/firefox_gum_test.html
 
 
-Test screen sharing through peer connection. 
+##Test screen sharing through peer connection. 
 ==============================================
 we can directly use https://apprtc.appspot.com
   # In screen sending end.
