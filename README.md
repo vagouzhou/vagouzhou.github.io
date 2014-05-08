@@ -2,7 +2,6 @@
 
 <b>##Test screen sharing </b>
 ==============================================
-<pre>
 
 <b>##how to get package</b>
 ====================================================
@@ -35,7 +34,6 @@ we can directly use https://apprtc.appspot.com
   
   # In receiving end.
     input link with room number <b>https://apprtc.appspot.com/?r=84903152</b>
-</pre>
 
 
 
