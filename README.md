@@ -41,3 +41,8 @@ we can directly use https://apprtc.appspot.com
 ==============================================
 1. building it by source code https://github.com/ruil2/gecko-dev/tree/screen_gmp.
 2. get binary pacakge from https://www.dropbox.com/sh/5e642hv4d3hm1wo/AABtnEOITHH3Y-pocHY6SItOa
+3. get plugin from https://github.com/ruil2/gecko-dev/tree/screen_gmp/gmp-openh264
+   Now, load plugin from , copy  gmp-openh264 to below.
+        windows: c:/tmp/GMP/
+        mac/linux: ~/tmp/GMP/
+
