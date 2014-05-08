@@ -1,11 +1,17 @@
 <pre>
 vagouzhou.github.io: web app demo testing.
 
-##Test GetUserMedia by github site.
+<b>##how to get package</b>
+====================================================
+1. building it by source code 
+2. get binary pacakge from https://www.dropbox.com/sh/5e642hv4d3hm1wo/AABtnEOITHH3Y-pocHY6SItOa
+
+
+<b>##Test GetUserMedia by github site.</b>
 ====================================================
 vagouzhou.github.io/firefox/firefox_gum_test.html
 
-##Test GetUserMedia in Local video
+<b>##Test GetUserMedia in Local video</b>
 ==============================================
 we also can run sever in local by python (need python 2.7),input command as below in terminal console
 <b>python pythonssl.py</b>
@@ -14,7 +20,7 @@ then access it in browser for testing.<br>
 e.g. https://localhost:4443/firefox/firefox_gum_test.html
 
 
-##Test screen sharing through peer connection. 
+<b>##Test screen sharing through peer connection. </b>
 ==============================================
 we can directly use https://apprtc.appspot.com
   # In screen sending end.
@@ -27,3 +33,10 @@ we can directly use https://apprtc.appspot.com
   # In receiving end.
     input link with room number <b>https://apprtc.appspot.com/?r=84903152</b>
 </pre>
+
+
+
+<b>##Test screen sharing + open264 </b>
+==============================================
+1. building it by source code https://github.com/ruil2/gecko-dev/tree/screen_gmp.
+2. get binary pacakge from https://www.dropbox.com/sh/5e642hv4d3hm1wo/AABtnEOITHH3Y-pocHY6SItOa
