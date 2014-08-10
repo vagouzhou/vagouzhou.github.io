@@ -10,7 +10,7 @@
 
 
 Note:
-<b>Please use "about:config" to add "localhost" into "media.getusermedia.screensharing.allowed_domains"</b>
+<b>Please use "about:config" to add "localhost" ,"apprtc.appspot.com", or "vagouzhou.github.io" into "media.getusermedia.screensharing.allowed_domains"</b>
 
 <b>##Test GetUserMedia by github site.</b>
 ====================================================
