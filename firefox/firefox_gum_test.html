@@ -3,8 +3,10 @@
 <head>
   <title>gUM Test Page</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" charset="utf-8">
+  <!--
   <link href='https://fonts.googleapis.com/css?family=Gentium+Basic:400,700' rel='stylesheet' type='text/css'>
-  <style>
+    -->
+<style>
     #main {
       display: block;
       margin: 0px auto;
@@ -56,6 +58,7 @@ Note: Audio will feedback unless you use a headset!<br><br>
       <input value="Picture" onclick="startPicture();" type="button">
       <input value="Screen" onclick="startScreen();" type="button">
       <input value="Application" onclick="startApplication();" type="button">
+      <input value="Window" onclick="startWindow();" type="button">
     </div>
     <div id="images">
        <div id="content"></div>
@@ -113,7 +116,9 @@ Note: Audio will feedback unless you use a headset!<br><br>
   function startScreen() {
     video_status = true;
 	mediaConstraints = {
-		video: {
+        video: {
+            mozMediaSource: "screen",
+            mediaSource: "screen",
 			mandatory:{mozMediaSource:'screen',
 				maxWidth:screen.availWidth,
 				maxHeight:screen.availHeight},
@@ -137,7 +142,9 @@ Note: Audio will feedback unless you use a headset!<br><br>
   function startApplication() {
     video_status = true;
 		mediaConstraints = {
-		video: {
+        video: {
+            mozMediaSource: "application",
+            mediaSource: "application",
 			mandatory:{mozMediaSource:'application',
 				maxWidth:screen.availWidth,
 				maxHeight:screen.availHeight},
@@ -157,7 +164,32 @@ Note: Audio will feedback unless you use a headset!<br><br>
 	}
     startMedia(mediaConstraints);
   }
-  
+    function startWindow() {
+    video_status = true;
+		mediaConstraints = {
+        video: {
+            mozMediaSource: "window",
+            mediaSource: "window",    
+			mandatory:{mozMediaSource:'window',
+				maxWidth:screen.availWidth,
+				maxHeight:screen.availHeight},
+			optional:[]
+			}
+	};
+	if(isChrome){
+		mediaConstraints = {
+		video: {
+			mandatory:{chromeMediaSource:'window',
+				maxWidth:screen.availWidth,
+				maxHeight:screen.availHeight},
+			optional:[]
+			}
+	};
+
+	}
+    startMedia(mediaConstraints);
+  }
+
   function startAudioVideo() {
     video_status = true;
     audio_status = true;
@@ -175,24 +207,28 @@ Note: Audio will feedback unless you use a headset!<br><br>
   }
 
   function stopMedia() {
-    if (video_status) {
-      video.mozSrcObject.stop();
-      video.mozSrcObject = null;
-      content.removeChild(video);
-      stopbuttons.removeChild(snapshot);
-      snapshot.value = "Snapshot";
-      frames.innerHTML = '';
-      capturing = false;
-      video_status = false;
-    } else if (audio_status) {
-      audio.mozSrcObject.stop();
-      audio.mozSrcObject = null;
+      if (video_status) {
+          if(video!=null && video.mozSrcObject!=null){
+            video.mozSrcObject.stop();
+            video.mozSrcObject = null;
+          }
+        content.removeChild(video);
+        stopbuttons.removeChild(snapshot);
+        snapshot.value = "Snapshot";
+        frames.innerHTML = '';
+        capturing = false;
+        video_status = false;
+      } else if (audio_status) {
+          if(audio!=null && audio.mozSrcObject !=null){
+            audio.mozSrcObject.stop();
+            audio.mozSrcObject = null;
+          }
       content.removeChild(audio);
       audio_status = false;
-    } else if (picture_status) {
-      picture.mozSrcObject = null;
-      content.removeChild(picture);
-      picture_status = false;
+      } else if (picture_status) {
+          picture.mozSrcObject = null;
+          content.removeChild(picture);
+          picture_status = false;
     }
     saved_stream = null;
     stop.style.display = "none";

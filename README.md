@@ -9,6 +9,9 @@
 2. get binary pacakge from https://www.dropbox.com/sh/5e642hv4d3hm1wo/AABtnEOITHH3Y-pocHY6SItOa
 
 
+Note:
+<b>Please use "about:config" to add "localhost" into "media.getusermedia.screensharing.allowed_domains"</b>
+
 <b>##Test GetUserMedia by github site.</b>
 ====================================================
 vagouzhou.github.io/firefox/firefox_gum_test.html
