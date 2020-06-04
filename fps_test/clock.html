@@ -1,0 +1,153 @@
+<html>
+<style>
+body {background-color:#2d2d2d;}
+
+#timedate {
+  font: small-caps lighter 80px/150% "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  text-align:left;
+  width: 50%;
+  margin: 40px auto;
+  color:#fff;
+  border-left: 3px solid #ed1f24;
+  padding: 20px;
+}
+#canvas_block {
+  align-content:center;
+}
+</style>
+<script>
+  var fps = 10.0;
+///==================================
+//clock
+Number.prototype.pad = function(n) {
+  for (var r = this.toString(); r.length < n; r = 0 + r);
+  return r;
+};
+
+function updateClock() {
+  var now = new Date();
+  var milli = Math.ceil(now.getMilliseconds()/(1000/fps)),
+    sec = now.getSeconds(),
+    min = now.getMinutes(),
+    hou = now.getHours(),
+    mo = now.getMonth(),
+    dy = now.getDate(),
+    yr = now.getFullYear();
+  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var tags = ["mon", "d", "y", "h", "m", "s", "mi"],
+    corr = [months[mo], dy, yr, hou.pad(2), min.pad(2), sec.pad(2), milli];
+  for (var i = 0; i < tags.length; i++)
+    document.getElementById(tags[i]).firstChild.nodeValue = corr[i];
+}
+
+function initClock() {
+  updateClock();
+  window.setInterval("updateClock()", 1);
+}
+
+
+///==================================
+//block annimation
+var blockPiece;
+
+
+var canvasArea = {
+    canvas : document.createElement("canvas"),
+    init : function() {
+        this.canvas.setAttribute("id", "canvas_block");
+        this.context = this.canvas.getContext("2d");
+        this.canvas.width = 1200;
+        this.canvas.height = 50;
+        document.body.appendChild(this.canvas);
+    },
+    start : function() {
+        this.interval = setInterval(updateBlocks, 1000/fps);
+    },
+    stop : function() {
+      clearInterval(this.interval);
+    },
+    restart : function() {
+      this.stop();
+      this.start();
+    },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+function component(width, height, color, x, y) {
+    this.width = width;
+    this.height = height;
+    this.x = x;
+    this.y = y;
+    this.color = color;
+    this.update = function() {
+        ctx = canvasArea.context;
+        ctx.fillStyle = color;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
+    this.newPos = function() {
+        this.x += 20;
+        if (this.x >= 1200) {
+          this.x = 0;
+        }     
+    }    
+}
+
+function updateBlocks() {
+    canvasArea.clear();
+    blockPiece.newPos();    
+    blockPiece.update();
+    drawNumbers();
+}
+
+function drawNumbers() {
+  ctx = canvasArea.context;
+  var i = 1;
+  ctx.fillStyle = "white";
+  ctx.textAlign = "center"; 
+  for(i=0; i<60; i++) {
+    ctx.font = '15px serif';
+    var num = i + 1;
+    if(num%10 != 0) {
+      ctx.font = '20px serif';
+      num = num%10;
+    }
+    ctx.fillText(num.toString(), i * 20 + 10, 20);
+  }
+}
+
+function InitBlockAnnimation() {
+    blockPiece = new component(20, 20, "red", 0, 3);
+    canvasArea.init();
+    canvasArea.start();
+}
+
+////
+function init() {
+  initClock();
+  InitBlockAnnimation();
+  document.getElementById("fps").value = fps;
+}
+
+function update_fps() {
+  fps = document.getElementById("fps").value;
+  canvasArea.restart();
+}
+</script>
+
+<body onLoad="init()">
+  <center>
+  <label style="color:white">what fps:</label><input type="number" min=1 max=60 step="1" pattern="\d+" id="fps" name="fps" onchange="update_fps()">
+  <div id="timedate">
+    <a id="mon">January</a>
+    <a id="d">1</a>,
+    <a id="y">0</a><br />
+    <a id="h">12</a> :
+    <a id="m">00</a>:
+    <a id="s">00</a>:
+    <a id="mi">000</a>
+  </div>
+</center>
+</body>
+</html>
