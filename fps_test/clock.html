@@ -17,6 +17,12 @@ body {background-color:#2d2d2d;}
 </style>
 <script>
   var fps = 10.0;
+  var url = new URL(window.location.href);
+  var fps_config = url.searchParams.get("fps");
+  console.log(fps_config);
+  if (fps_config > 0) {
+  	fps = fps_config
+  }
 ///==================================
 //clock
 Number.prototype.pad = function(n) {
